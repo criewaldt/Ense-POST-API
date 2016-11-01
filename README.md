@@ -1,6 +1,6 @@
 # Ense-POST-API
 
-A 3rd party API for uploading audio to Ense.nyc
+A 3rd party Python API for uploading audio to Ense.nyc
 
 ##How to use
 Clone repo
