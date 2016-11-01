@@ -1,41 +1,16 @@
+###for my machine
+import sys
+sys.path.append("/usr/local/lib/python2.7/site-packages")
+###
 import datetime
 import requests
-import sys
 import json
-import base64
-#for my machine
-sys.path.append("/usr/local/lib/python2.7/site-packages")
-
-
 from requests_toolbelt import MultipartEncoder
-
-
-
 
 class Ense(object):
     def __init__(self):
         self.s = requests.Session()
         self.s.headers.update({'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/53.0.2785.143 Safari/537.36'})
-
-    #add name method
-    """
-    def AddName(self, name=[]):
-        url = "https://api.ense.nyc/topics/2016_11_01T05_34_34.598Z/13467"
-        headers = {
-            'Host':'api.ense.nyc',
-            'Origin':'https://ense.nyc',
-            'deltas': ["""{"UpsertTopic":{"name":"%s"}},""" % (n) for n in name],
-            'Referer':'https://ense.nyc/ense/13467/2016_11_01T05_34_34.598Z',
-            'content-type':'application/x-www-form-urlencoded;charset=UTF-8',
-            }
-        data = {
-
-            }
-        r = self.s.post(url, headers=headers)
-        #print r.headers
-        print r.request.headers
-        print r.content
-    """
     
     def Post(self, mp3_path):
         #open audio file and create mp3 object
@@ -98,6 +73,27 @@ class Ense(object):
         print "POST 3:", r.status_code
         ense_location = "https://ense.nyc/ense/" + dbkey + '/' + timestamp
         print ense_location
+        
+
+    #add name method
+    """
+    def AddName(self, name=[]):
+        url = "https://api.ense.nyc/topics/2016_11_01T05_34_34.598Z/13467"
+        headers = {
+            'Host':'api.ense.nyc',
+            'Origin':'https://ense.nyc',
+            'deltas': ["""{"UpsertTopic":{"name":"%s"}},""" % (n) for n in name],
+            'Referer':'https://ense.nyc/ense/13467/2016_11_01T05_34_34.598Z',
+            'content-type':'application/x-www-form-urlencoded;charset=UTF-8',
+            }
+        data = {
+
+            }
+        r = self.s.post(url, headers=headers)
+        #print r.headers
+        print r.request.headers
+        print r.content
+    """
 
     #magic methods
     """
@@ -112,7 +108,5 @@ class Ense(object):
     """
 
 if __name__ == "__main__":
-    e = Ense()
-    #e.AddName(['chris','andrew'])
-    #e.Post('mp3/crowd.mp3')
+    pass
     
