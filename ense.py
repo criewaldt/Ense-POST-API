@@ -12,13 +12,15 @@ class Ense(object):
         self.s = requests.Session()
         self.s.headers.update({'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/53.0.2785.143 Safari/537.36'})
     
-    def Post(self, mp3_path):
+    def Post(self, mp3_path="", addNameList=[], title="untitled", unlisted=False):
         #open audio file and create mp3 object
         with open(mp3_path, 'rb') as _mp3:
             mp3 = _mp3.read()
+            
         #create timestamp and make it uniform to WebApp standard
         timestamp = datetime.datetime.utcnow().isoformat().replace("-","_")
         timestamp = timestamp.replace(":", "_")[:-3]+"Z"
+        
         #POST: 1
         url1 = "https://api.ense.nyc/ense/{}".format(timestamp)
         headers = {
@@ -34,8 +36,9 @@ class Ense(object):
         #-post
         r = self.s.post(url1, headers=headers, data=data)
         #response
-        print "POST 2:", r.status_code
+        print "POST 1:", r.status_code
         response = json.loads(r.content)
+        
         #set vars
         key = response['contents']['uploadKey']
         ### need to change this to grab AccessKeyId from page
@@ -43,6 +46,7 @@ class Ense(object):
         Policy = response['contents']['policyBundle']['policyDoc']
         Signature = response['contents']['policyBundle']['signature']
         dbkey = response['contents']['dbKey']
+        
         #POST: 2
         url2 = "https://s3.amazonaws.com/media.ense.nyc/"
         multipart_data = MultipartEncoder(
@@ -71,29 +75,52 @@ class Ense(object):
         #-post
         r = self.s.post(url1+'/'+dbkey, headers=headers, data=data)
         print "POST 3:", r.status_code
-        ense_location = "https://ense.nyc/ense/" + dbkey + '/' + timestamp
-        print ense_location
         
+        ense_location = "https://ense.nyc/ense/" + dbkey + '/' + timestamp
 
-    #add name method
-    """
-    def AddName(self, name=[]):
-        url = "https://api.ense.nyc/topics/2016_11_01T05_34_34.598Z/13467"
+        self._edit(addNameList, title, unlisted, dbkey, timestamp)
+
+        print "Ense Url:", ense_location
+        
+    
+    def _edit(self, addNameList, title, unlisted, dbkey, timestamp):
+        #POST: 1
+        #create payload for added names
+        deltas = """{"deltas":[{"RemoveTopic":{"name":"anonymous"}},"""+",".join("""{"UpsertTopic":{"name":"%s"}}""" % n for n in addNameList)+"]}"
+        url = "https://api.ense.nyc/topics/{}/{}".format(timestamp, dbkey)
         headers = {
             'Host':'api.ense.nyc',
             'Origin':'https://ense.nyc',
-            'deltas': ["""{"UpsertTopic":{"name":"%s"}},""" % (n) for n in name],
-            'Referer':'https://ense.nyc/ense/13467/2016_11_01T05_34_34.598Z',
+            'Referer':'https://ense.nyc/ense/{}/{}'.format(dbkey, timestamp),
             'content-type':'application/x-www-form-urlencoded;charset=UTF-8',
             }
         data = {
-
+            'deltas':deltas
             }
-        r = self.s.post(url, headers=headers)
-        #print r.headers
-        print r.request.headers
-        print r.content
-    """
+        r = self.s.post(url, headers=headers, data=data)
+        print "POST 1:", r.status_code
+
+        #POST2
+        if unlisted:
+            flag = 'true'
+        else:
+            flag = 'false'
+        multipart_data = MultipartEncoder(
+        fields = (
+            ('title', title),
+            ('topics', 'undefined'),
+            ('humanInterpretation',''),
+            ('id',timestamp),
+            ('unlisted', flag),))
+
+        #post
+        url2 = "https://api.ense.nyc/ense/{}/{}".format(timestamp, dbkey)
+        r = self.s.post(url2, data=multipart_data, headers={"Content-Type": multipart_data.content_type,
+                                    'Host': 'api.ense.nyc',
+                                    'Origin': 'https://ense.nyc',
+                                    'Referer':'https://ense.nyc/ense/{}/{}'.format(dbkey, timestamp),
+                                    })
+        print "POST 2:", r.status_code
 
     #magic methods
     """
@@ -108,5 +135,6 @@ class Ense(object):
     """
 
 if __name__ == "__main__":
-    pass
+    ense = Ense()
+    ense.Post('mp3/eruption.mp3', ['ChrisR', 'Python API', 'Guitar Solo', 'Van Halen'], "Van Halen: Eruption")
     
