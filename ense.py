@@ -135,6 +135,7 @@ class Ense(object):
     """
 
 if __name__ == "__main__":
+    #TEST
     ense = Ense()
     ense.Post('mp3/eruption.mp3', ['ChrisR', 'Python API', 'Guitar Solo', 'Van Halen'], "Van Halen: Eruption")
     
