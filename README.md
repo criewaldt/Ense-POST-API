@@ -44,8 +44,6 @@ Or, you can leave out the username i.e. `ense = Ense()` as default=`"anonymous"`
 
 This is the method to upload an Ense to Ense.nyc
 
----
-
 filepath = `STRING` Path to mp3 file i.e. `"PATH/TO/MP3.mp3"` - default=`None` 
 
 addNameTags = `[STRINGS]` List of nameTags to include i.e. `['foo', 'bar']` - default=`[]`
@@ -55,11 +53,11 @@ title = `STRING` The title of your Ense i.e. `"My Ense!"` - default=`"untitled"`
 
 unlisted = `BOOLEAN` Wether or not file is listed publicly i.e. `True` - default=`False`
 
+---
+
 ###Download(target_url, destination)
 
 This is the method to download an Ense from Ense.nyc
-
----
 
 target_url = `STRING` The url of the Ense you want to download i.e. `"https://ense.nyc/ense/13533/2016_11_01T10_39_25.683Z"` - default=`None`
 
