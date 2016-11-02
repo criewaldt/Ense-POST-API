@@ -20,13 +20,13 @@ ense.Post("PATH/TO/MP3.mp3", ["NameTag1", "NameTag2"...], "Title Goes Here!")
 >> Ense Url: https://ense.nyc/ense/13533/2016_11_01T10_39_25.683Z
 ```
 
-When you call Ense(), you can include a username as a `STRING` i.e. `ense = Ense(‘ChrisR’)`
+When you call Ense(), you can include a username as a `STRING` i.e. `ense = Ense("ChrisR")`
 
 Or, you can leave out the username i.e. `ense = Ense()` as default=`"anonymous"`
 
 ##Methods
 
-###Post(filepath, nameTags, title, unlisted)
+###Post(filepath, addNameTags, title, unlisted)
 
 This is the method to upload an Ense to Ense.nyc
 
@@ -34,13 +34,14 @@ This is the method to upload an Ense to Ense.nyc
 
 filepath = `STRING` Path to mp3 file i.e. `"PATH/TO/MP3.mp3"` - default=`None` 
 
-nameTags = `[STRINGS]` List of nameTags to include i.e. `['foo', 'bar']` - default=`None` 
+addNameTags = `[STRINGS]` List of nameTags to include i.e. `['foo', 'bar']` - default=`[]`
+**NOTE: If you called Ense class with a `username` parameter, you do not need to include it in `addNameTags`**
 
 title = `STRING` The title of your Ense i.e. `"My Ense!"` - default=`"untitled"` 
 
 unlisted = `BOOLEAN` Wether or not file is listed publicly i.e. `True` - default=`False`
 
-###Download(target_url, nameTags, title, unlisted)
+###Download(target_url, destination)
 
 This is the method to download an Ense from Ense.nyc
 
