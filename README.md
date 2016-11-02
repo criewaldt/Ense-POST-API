@@ -1,6 +1,6 @@
 # Ense-POST-API
 
-A 3rd party Python API for uploading to Ense.nyc platform.
+A 3rd party Python API for uploading to Ense.nyc platform via POST requests.
 
 ##How to use
 
@@ -15,7 +15,7 @@ ense = Ense("ChrisR")
 Upload an Ense
 
 ```python
-ense.Post("PATH/TO/MP3.mp3", ["NameTag1", "NameTag2"...], "Title Goes Here!")
+ense.Upload("PATH/TO/MP3.mp3", ["NameTag1", "NameTag2"...], "Title Goes Here!")
 
 >> POST 1: 200
 >> POST 2: 204
@@ -40,7 +40,7 @@ Or, you can leave out the username i.e. `ense = Ense()` as default=`"anonymous"`
 
 ##Methods
 
-###Post(filepath, addNameTags, title, unlisted)
+###Upload(filepath, addNameTags, title, unlisted)
 
 This is the method to upload an Ense to Ense.nyc
 
