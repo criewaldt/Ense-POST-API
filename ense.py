@@ -2,15 +2,45 @@
 import sys
 sys.path.append("/usr/local/lib/python2.7/site-packages")
 ###
+import os
 import datetime
 import requests
 import json
 from requests_toolbelt import MultipartEncoder
 
 class Ense(object):
-    def __init__(self):
+    def __init__(self, username="anonymous"):
+        self.username = username
         self.s = requests.Session()
         self.s.headers.update({'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/53.0.2785.143 Safari/537.36'})
+
+    def Download(self, target_url=None, destination=os.path.dirname(os.path.realpath(__file__))):
+        if os.path.isdir(destination):
+            if target_url and "https://ense.nyc/ense/" in target_url:
+                #get key, user values
+                results = target_url.split('/')
+                user = results[-1]
+                key = results[-2]
+                #GET: 1
+                url = "https://s3.amazonaws.com/media.ense.nyc/enses/" + user + "/" + key + "/0"
+                headers = {
+                'Origin' : 'https://ense.nyc',
+                'Referer' : 'https://ense.nyc/ense/'+key+'/'+user,
+                }
+                #-get
+                r = self.s.get(url, stream=True)
+                #save file
+                with open(os.path.join(destination, "{}.m4a".format(key)), 'wb') as f:
+                    for chunk in r.iter_content(chunk_size=1024): 
+                        if chunk: # filter out keep-alive new chunks
+                            f.write(chunk)
+                print "Successfully saved: {}".format(key), "in {}".format(destination)
+                return
+            else:
+                print "Error: incorrect URL"
+        else:
+            print "Error: destination isn't a directory"
+        
     
     def Post(self, mp3_path="", addNameList=[], title="untitled", unlisted=False):
         #open audio file and create mp3 object
@@ -20,7 +50,7 @@ class Ense(object):
         #create timestamp and make it uniform to WebApp standard
         timestamp = datetime.datetime.utcnow().isoformat().replace("-","_")
         timestamp = timestamp.replace(":", "_")[:-3]+"Z"
-        
+
         #POST: 1
         url1 = "https://api.ense.nyc/ense/{}".format(timestamp)
         headers = {
@@ -77,7 +107,7 @@ class Ense(object):
         print "POST 3:", r.status_code
         
         ense_location = "https://ense.nyc/ense/" + dbkey + '/' + timestamp
-
+        
         self._edit(addNameList, title, unlisted, dbkey, timestamp)
 
         print "Ense Url:", ense_location
@@ -86,6 +116,8 @@ class Ense(object):
     def _edit(self, addNameList, title, unlisted, dbkey, timestamp):
         #POST: 1
         #create payload for added names
+        #add username to payload
+        addNameList.append(self.username)
         deltas = """{"deltas":[{"RemoveTopic":{"name":"anonymous"}},"""+",".join("""{"UpsertTopic":{"name":"%s"}}""" % n for n in addNameList)+"]}"
         url = "https://api.ense.nyc/topics/{}/{}".format(timestamp, dbkey)
         headers = {
@@ -135,7 +167,10 @@ class Ense(object):
     """
 
 if __name__ == "__main__":
-    #TEST
-    ense = Ense()
-    ense.Post('mp3/eruption.mp3', ['ChrisR', 'Python API', 'Guitar Solo', 'Van Halen'], "Van Halen: Eruption")
+    ense = Ense('ChrisR')
     
+    #TEST 1: Upload an Ense
+    ense.Post('mp3/eruption.mp3', ['Python API', 'Guitar Solo', 'Van Halen'], "Van Halen: Eruption")
+
+    #TEST 2: Download an Ense
+    ense.Download("https://ense.nyc/ense/13792/orangevioletgreen")
