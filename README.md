@@ -61,6 +61,6 @@ This is the method to download an Ense from Ense.nyc
 
 ---
 
-target_url = `STRING` The url of the Ense you want to download i.e. `https://ense.nyc/ense/13533/2016_11_01T10_39_25.683Z` - default=`None`
+target_url = `STRING` The url of the Ense you want to download i.e. `"https://ense.nyc/ense/13533/2016_11_01T10_39_25.683Z"` - default=`None`
 
-destination = `STRING` Desired destination folder for downloaded Ense i.e. `/Users/someone/Desktop` - default=`os.path.dirname(os.path.realpath(__file__))`
+destination = `STRING` Desired destination folder for downloaded Ense i.e. `"/Users/someone/Desktop"` - default=`os.path.dirname(os.path.realpath(__file__))`
