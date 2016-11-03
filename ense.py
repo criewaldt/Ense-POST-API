@@ -155,10 +155,4 @@ class Ense(object):
         print "POST 2:", r.status_code
 
 if __name__ == "__main__":
-    ense = Ense('ChrisR')
-    
-    #TEST 1: Upload an Ense
-    #ense.Upload('mp3/eruption.mp3', ['Python API', 'Guitar Solo', 'Van Halen'], "Van Halen: Eruption")
-
-    #TEST 2: Download an Ense
-    #ense.Download("https://ense.nyc/ense/13792/orangevioletgreen")
+    pass
