@@ -34,7 +34,7 @@ ense.Download("https://ense.nyc/ense/13792/orangevioletgreen")
 
 ```
 
-When you call Ense(), you can include a username as a `STRING` i.e. `ense = Ense("ChrisR")`
+When you call Ense class, you can include a username as a `STRING` i.e. `ense = Ense("ChrisR")`
 
 Or, you can leave out the username i.e. `ense = Ense()` as default=`"anonymous"`
 
