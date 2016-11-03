@@ -1,4 +1,4 @@
-# Ense-POST-API
+# PyEnse
 
 A RESTful 3rd party Python API for Ense.nyc platform.
 
