@@ -1,6 +1,6 @@
 # Ense-POST-API
 
-A 3rd party Python API for uploading to Ense.nyc platform via POST requests.
+A RESTful 3rd party Python API for Ense.nyc platform.
 
 ##How to use
 
