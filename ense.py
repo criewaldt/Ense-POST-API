@@ -42,7 +42,7 @@ class Ense(object):
             print "Error: destination isn't a directory"
         
     
-    def Post(self, mp3_path="", addNameList=[], title="untitled", unlisted=False):
+    def Upload(self, mp3_path="", addNameList=[], title="untitled", unlisted=False):
         #open audio file and create mp3 object
         with open(mp3_path, 'rb') as _mp3:
             mp3 = _mp3.read()
@@ -154,23 +154,11 @@ class Ense(object):
                                     })
         print "POST 2:", r.status_code
 
-    #magic methods
-    """
-    def __enter__(self):
-        #open ense object
-        print 'ense'
-        return self
-
-    def __exit__(self, type, value, tb):
-        #make sure to close everything thats open!
-        pass
-    """
-
 if __name__ == "__main__":
     ense = Ense('ChrisR')
     
     #TEST 1: Upload an Ense
-    ense.Post('mp3/eruption.mp3', ['Python API', 'Guitar Solo', 'Van Halen'], "Van Halen: Eruption")
+    #ense.Upload('mp3/eruption.mp3', ['Python API', 'Guitar Solo', 'Van Halen'], "Van Halen: Eruption")
 
     #TEST 2: Download an Ense
-    ense.Download("https://ense.nyc/ense/13792/orangevioletgreen")
+    #ense.Download("https://ense.nyc/ense/13792/orangevioletgreen")
