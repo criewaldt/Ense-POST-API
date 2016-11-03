@@ -17,7 +17,7 @@ ense = Ense("ChrisR")
 Upload an Ense
 
 ```python
-ense.Upload("PATH/TO/MP3.mp3", ["NameTag1", "NameTag2"...], "Title Goes Here!")
+ense.Upload("PATH/TO/MP3.mp3", ["ExtraNameTag", "ExtraNameTag2"...], "Title Goes Here!")
 
 >> POST 1: 200
 >> POST 2: 204
