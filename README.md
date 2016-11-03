@@ -36,14 +36,12 @@ ense.Download("https://ense.nyc/ense/13792/orangevioletgreen", "/Users/someone/D
 
 ```
 
-##`class Ense(username="anonymous")`
+###`class Ense(username="anonymous")`
 
-This is the main class
-
-- username = `str` The username you want to include in your Ense upload
+- username = `str` The default name tag you want to include in your Ense uploads
 i.e. `ense = Ense("ChrisR")`
 
-###Methods
+####Methods
 
 ####`Upload(filepath=None, addNameTags=[], title="untitled", unlisted=False)`
 
