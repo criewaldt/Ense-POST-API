@@ -38,13 +38,15 @@ ense.Download("https://ense.nyc/ense/13792/orangevioletgreen", "/Users/someone/D
 
 ##Class Ense(username)
 
+This is the main class.
+
 >username = `str` i.e. `ense = Ense("ChrisR")` - default=`"anonymous"`
 
 ###Methods
 
 ####Upload(filepath, addNameTags, title, unlisted)
 
->This is the method to upload an mp3 to Ense.nyc
+This is the method to upload an Ense to Ense.nyc.
 
 >filepath = `str` Path to mp3 file i.e. `"PATH/TO/MP3.mp3"` - default=`None` 
 
@@ -59,7 +61,7 @@ ense.Download("https://ense.nyc/ense/13792/orangevioletgreen", "/Users/someone/D
 
 ####Download(target_url, destination)
 
->This is the method to download an Ense from Ense.nyc
+This is the method to download an Ense from Ense.nyc.
 
 >target_url = `str` The url of the Ense you want to download i.e. `"https://ense.nyc/ense/13533/2016_11_01T10_39_25.683Z"` - default=`None`
 
