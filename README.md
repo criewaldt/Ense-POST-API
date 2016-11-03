@@ -28,7 +28,7 @@ ense.Upload("PATH/TO/MP3.mp3", ["NameTag1", "NameTag2"...], "Title Goes Here!")
 Download an Ense
 
 ```python
-ense.Download("https://ense.nyc/ense/13792/orangevioletgreen")
+ense.Download("https://ense.nyc/ense/13792/orangevioletgreen", "/Users/someone/Desktop")
 
 >> Successfully saved: 13792 in /Users/someone/Desktop
 
