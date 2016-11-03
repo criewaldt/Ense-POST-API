@@ -1,6 +1,6 @@
 # PyEnse
 
-A RESTful 3rd party Python API for Ense.nyc platform.
+A RESTful 3rd party Python API for Ense.nyc
 
 ##How to use
 
