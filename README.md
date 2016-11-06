@@ -70,3 +70,7 @@ i.e. `"https://ense.nyc/ense/13533/2016_11_01T10_39_25.683Z"`
 
 - destination = `str` Desired destination folder for downloaded Ense
 i.e. `"/Users/someone/Desktop"`
+
+###With help from
+
+[Charles Proxy - Watch HTTP requests from multiple devices](https://www.charlesproxy.com/)
