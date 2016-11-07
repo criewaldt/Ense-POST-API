@@ -2,6 +2,13 @@
 
 A RESTful 3rd party Python library for Ense.nyc platform
 
+##Requrements
+Python 2.7
+
+Requests
+
+Requests_toolbelt
+
 ##How to use
 
 Clone repo
@@ -72,5 +79,8 @@ i.e. `"https://ense.nyc/ense/13533/2016_11_01T10_39_25.683Z"`
 i.e. `"/Users/someone/Desktop"`
 
 ###With help from
+[requests_toolbelt](http://toolbelt.readthedocs.io/en/latest/uploading-data.html#streaming-multipart-data-encoder)
 
-[Charles Proxy - Watch HTTP requests from multiple devices](https://www.charlesproxy.com/)
+[Charles Proxy](https://www.charlesproxy.com/)
+
+StackOverflow [answer](http://stackoverflow.com/questions/12385179/how-to-send-a-multipart-form-data-with-requests-in-python) to my issues with Requests package when passing files parameter for multipart formdata
