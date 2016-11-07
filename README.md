@@ -1,6 +1,6 @@
 # PyEnse
 
-A RESTful 3rd party Python API for Ense.nyc
+A RESTful 3rd party Python library for Ense.nyc platform
 
 ##How to use
 
@@ -11,13 +11,13 @@ Import and call Ense class
 ```python
 from ense import Ense
 
-ense = Ense("ChrisR")
+ense = Ense(“PyEnse”)
 ```
 
 Upload an Ense
 
 ```python
-ense.Upload("PATH/TO/MP3.mp3", ["ExtraNameTag", "ExtraNameTag2"...], "Title Goes Here!")
+ense.Upload("PATH/TO/MP3.mp3", [“SubjectTag1”, “SubjectTag2”, …], “Title goes here!”)
 
 >> POST 1: 200
 >> POST 2: 204
@@ -39,7 +39,7 @@ ense.Download("https://ense.nyc/ense/13792/orangevioletgreen", "/Users/someone/D
 ###`class Ense(username="anonymous")`
 
 - username = `str` The default name tag you want to include in your Ense uploads
-i.e. `ense = Ense("ChrisR")`
+i.e. `ense = Ense(“PyEnse”)`
 
 ####Methods
 

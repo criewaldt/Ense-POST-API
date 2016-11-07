@@ -1,7 +1,10 @@
+#!/usr/bin/env python
+
 ###for my machine
 import sys
 sys.path.append("/usr/local/lib/python2.7/site-packages")
 ###
+
 import os
 import datetime
 import requests
@@ -12,7 +15,7 @@ class Ense(object):
     def __init__(self, username="anonymous"):
         self.username = username
         self.s = requests.Session()
-        self.s.headers.update({'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/53.0.2785.143 Safari/537.36'})
+        self.s.headers.update({'User-Agent': 'Ense/1 CFNetwork/808.1.4 Darwin/16.1.0'})
 
     def Download(self, target_url=None, destination=os.path.dirname(os.path.realpath(__file__))):
         if os.path.isdir(destination):
@@ -59,9 +62,11 @@ class Ense(object):
             'Referer' : 'https://ense.nyc/',
             }
         data = {
+            'author':self.username,
+            'title':title,
             'mimeType':'audio/mp3',
-            'deviceKey':'qZBxMQvTbhucfDGe2b6s6P',
-            'userAgent':'WebApp',
+            'deviceKey':'663mIN8biWie6Kxf1Ctptm',
+            'userAgent':'iOSApp',
             }
         #-post
         r = self.s.post(url1, headers=headers, data=data)
@@ -108,8 +113,6 @@ class Ense(object):
         
         ense_location = "https://ense.nyc/ense/" + dbkey + '/' + timestamp
         
-        self._edit(addNameList, title, unlisted, dbkey, timestamp)
-
         print "Ense Url:", ense_location
         
     
@@ -156,3 +159,4 @@ class Ense(object):
 
 if __name__ == "__main__":
     pass
+    
